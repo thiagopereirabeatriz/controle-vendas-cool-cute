@@ -40,12 +40,12 @@ CREATE TABLE Cliente (
   cliEmail VARCHAR(255) NOT NULL,
   PRIMARY KEY(cliCodigo)
 );
-CREATE TABLE OutrasMovimentacoes (
-  movCodigo INTEGER AUTO_INCREMENT,
-  movDescricao VARCHAR(255) NOT NULL,
-  movValor DECIMAL NOT NULL,
-  movData DATE NOT NULL,
-  PRIMARY KEY(movCodigo)
+CREATE TABLE TipoMovimentacao (
+  timCodigo INTEGER AUTO_INCREMENT,
+  movCodigo INTEGER NOT NULL,
+  timDescricao VARCHAR(255) NOT NULL,
+  timOperacao BOOL NOT NULL,
+  PRIMARY KEY(timCodigo)
 );
 CREATE TABLE Entrada (
   entCodigo INTEGER AUTO_INCREMENT,
@@ -54,13 +54,14 @@ CREATE TABLE Entrada (
   entObservacao VARCHAR(255),
   PRIMARY KEY(entCodigo)
 );
-CREATE TABLE TipoMovimentacao (
-  timCodigo INTEGER AUTO_INCREMENT,
-  movCodigo INTEGER NOT NULL,
-  timDescricao VARCHAR(255) NOT NULL,
-  timOperacao BOOL NOT NULL,
-  PRIMARY KEY(timCodigo),
-  FOREIGN KEY(movCodigo) REFERENCES OutrasMovimentacoes(movCodigo)
+CREATE TABLE OutrasMovimentacoes (
+  movCodigo INTEGER AUTO_INCREMENT,
+  timCodigo INTEGER NOT NULL,
+  movDescricao VARCHAR(255) NOT NULL,
+  movValor DECIMAL NOT NULL,
+  movData DATE NOT NULL,
+  PRIMARY KEY(movCodigo),
+  FOREIGN KEY(timCodigo) REFERENCES TipoMovimentacao(timCodigo)
 );
 CREATE TABLE ProdutoEstoque (
   estCodigo INTEGER AUTO_INCREMENT,
